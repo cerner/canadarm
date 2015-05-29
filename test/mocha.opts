@@ -1,0 +1,3 @@
+--reporter nyan
+--ui bdd
+--timeout 200

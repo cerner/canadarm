@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: instrument/function.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: instrument/function.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>function _watchFn(fn, context, settings) {
+  // Exit function early if it has already
+  // been wrapped in a watch call.
+  if (fn && fn._wrapper && typeof(fn._wrapper === 'function')) {
+    return fn._wrapper;
+  }
+
+  var wrapper = function() {
+    try {
+      return fn.apply(context || this, arguments);
+    } catch(error) {
+      Canadarm.error(error.message, error, undefined, settings);
+    }
+  };
+
+  fn._wrapper = wrapper;
+  return wrapper;
+}
+
+/**
+ * Return a wrapped function which when called, logs any errors thrown.
+ *
+ * @memberof Canadarm.Events
+ * @function watch
+ *
+ * @example
+ *   Canadarm.watch(myFunction);
+ *
+ * @param {Function} fn - The function to wrap.
+ * @param {Object} context - The context to execute the function in. Defaults to this.
+ * @return A wrapped function with the original function a property of the wrapped function called _wrapped.
+ */
+Canadarm.watch = function(fn, context) {
+  return _watchFn(fn, context);
+};
+
+
+/**
+ * Execute the given function and logs any errors thrown.
+ *
+ * @memberof Canadarm.Events
+ * @function attempt
+ *
+ * @example
+ *   Canadarm.attempt(myFunction); // immediately executed
+ *
+ * @param {function} fn - The function to wrap.
+ * @param {object} context - The context to execute the function in. Defaults to this.
+ * @param {} Additional arguments passed to the function.
+ * @return The result of passed function fn.
+ */
+Canadarm.attempt = function(fn, context) {
+  var args = Array.prototype.slice.call(arguments, 2);
+  return _watchFn(fn, context)(args);
+};
+
+/**
+ * Return wrapped function which when called, logs any errors thrown.
+ * Should only be used when needing to have custom, localized error
+ * handling.
+ *
+ * @memberof Canadarm.Events
+ * @function localWatch
+ *
+ * @example
+ *   mySpecificFunction = Canadarm.localWatch(function realFunction() {
+ *      // The parts that do the actual work of your application.
+ *    },
+ *    {
+ *      appenders: [Canadarm.Appender.standardLogAppender],
+ *      handlers: [Canadarm.Handler.beaconHandler('http://path-to-my-logger.somesite.com/more-path/')]
+ *    }
+ *  )
+ *
+ * @param {function} fn - The function to wrap
+ * @param {object} settings - Override default Appenders and Handlers here, by default will do nothing if not passed.
+ * @param {object} context - The context to execute the function in. Defaults to this.
+ * @return A wrapped function with the original function a property of the wrapped function called _wrapped.
+ */
+Canadarm.localWatch = function(fn, settings, context) {
+  return _watchFn(fn, context, settings);
+};
+
+/**
+ * Execute the given function and logs any errors thrown.
+ *
+ * @memberof Canadarm.Events
+ * @function localAttempt
+ *
+ * @example
+ *   Canadarm.localAttempt(myFunction, settingsHash); // immediately executed
+ *
+ * @param {function} fn - The function to wrap.
+ * @param {object} settings - Override default Appenders and Handlers here, by default will do nothing if not passed.
+ * @param {object} context - The context to execute the function in. Defaults to this.
+ * @param {} Additional arguments passed to the function.
+ * @return The result of passed function fn.
+ */
+Canadarm.localAttempt = function(fn, settings, context) {
+  var args = Array.prototype.slice.call(arguments, 3);
+  return _watchFn(fn, context, settings)(args);
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Namespaces</h3><ul><li><a href="Canadarm.html">Canadarm</a></li><li><a href="Canadarm.Appender.html">Appender</a></li><li><a href="Canadarm.constant.html">constant</a></li><li><a href="Canadarm.Events.html">Events</a></li><li><a href="Canadarm.Handler.html">Handler</a></li><li><a href="Canadarm.level.html">level</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_oldOnError">_oldOnError</a></li><li><a href="global.html#_onError">_onError</a></li><li><a href="global.html#addAppender">addAppender</a></li><li><a href="global.html#addHandler">addHandler</a></li><li><a href="global.html#customLogEvent">customLogEvent</a></li><li><a href="global.html#fixedEncodeURIComponent">fixedEncodeURIComponent</a></li><li><a href="global.html#gatherErrors">gatherErrors</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#pushErrors">pushErrors</a></li><li><a href="global.html#setUpOnErrorHandler">setUpOnErrorHandler</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue May 19 2015 14:52:14 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

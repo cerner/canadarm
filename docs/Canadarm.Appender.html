@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: Appender</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Namespace: Appender</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="Canadarm.html">Canadarm</a>.</span>
+    
+    Appender
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="standardLogAppender"><span class="type-signature">&lt;static> </span>standardLogAppender<span class="signature">(level, exception, message, data)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Recommended default log appender. Adds property attributes below to the logs.  Depending
+on the browser some values may be default logged as '?' when the value cannot
+be determined.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>level</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Log level of the exception. (e.g. ERROR, FATAL)</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>exception</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">error</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">JavaScript Error object.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Message of the error.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">A no nesting key/value set of extra data for a log.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>logDate</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The UTC time the browser threw the error.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>language</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The language set on the page.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>characterSet</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Encoding used to read the page.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Specifies the type of the log as 'jserror'.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>columnNumber</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The column number of where the error took place.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>lineNumber</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The line number of where the error took place.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>msg</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The message for the error. (e.g. [ERROR]: blah blah)</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>pageURL</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The URL location of the page the error occurred on.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The URL location of the script that produced the error.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>stack</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Stacktrace of the exception that occurred.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="standard.js.html">appender/standard.js</a>, <a href="standard.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Namespaces</h3><ul><li><a href="Canadarm.html">Canadarm</a></li><li><a href="Canadarm.Appender.html">Appender</a></li><li><a href="Canadarm.constant.html">constant</a></li><li><a href="Canadarm.Events.html">Events</a></li><li><a href="Canadarm.Handler.html">Handler</a></li><li><a href="Canadarm.level.html">level</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_oldOnError">_oldOnError</a></li><li><a href="global.html#_onError">_onError</a></li><li><a href="global.html#addAppender">addAppender</a></li><li><a href="global.html#addHandler">addHandler</a></li><li><a href="global.html#customLogEvent">customLogEvent</a></li><li><a href="global.html#fixedEncodeURIComponent">fixedEncodeURIComponent</a></li><li><a href="global.html#gatherErrors">gatherErrors</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#pushErrors">pushErrors</a></li><li><a href="global.html#setUpOnErrorHandler">setUpOnErrorHandler</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue May 19 2015 14:52:14 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

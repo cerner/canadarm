@@ -1,0 +1,46 @@
+### OSX - https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
+
+# System Files
+
+.DS_Store
+
+### Node - https://github.com/github/gitignore/blob/master/Node.gitignore - 11/24/14
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+node_modules
+
+### Sublime Text - https://github.com/github/gitignore/blob/master/Global/SublimeText.gitignore - 12/02/14
+
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+
+# sftp configuration file
+sftp-config.json

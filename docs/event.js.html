@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: instrument/event.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: instrument/event.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/* global Event,Element */
+/**
+ * Internal method for setting up event listening within this library.
+ *
+ * This works by overriding the default `addEventListener`/`attachEvent` and
+ * the `removeEventListener`/`detachEvent`.  The default add and remove of events
+ * is overridden and every function that is attached as a listener is wrapped in a
+ * `Canadarm.watch` call.
+ *
+ * For removing of the event the internals of the `Canadarm.watch` call keep track
+ * of the function made and always return a new function for watching or the one
+ * that is already watched. This allows the code between attaching and removing
+ * events to look nearly identical.  It also has the added bonus of not doing
+ * extra work when accidentally watching an already watched function.
+ *
+ * @private
+ * @memberof Canadarm.Events
+ * @function setUpEventListening
+ */
+function setUpEventListening() {
+  var addEventListener, removeEventListener,
+    eventListeners = [];
+
+  // Modern Browsers
+  if (window.EventTarget) {
+    addEventListener = window.EventTarget.prototype.addEventListener;
+    removeEventListener = window.EventTarget.prototype.removeEventListener;
+
+    window.EventTarget.prototype.addEventListener = function (event, callback, bubble) {
+      return addEventListener.call(this, event, Canadarm.watch(callback), bubble);
+    };
+
+    window.EventTarget.prototype.removeEventListener = function (event, callback, bubble) {
+      return removeEventListener.call(this, event, Canadarm.watch(callback), bubble);
+    };
+
+  // Internet Explorer &lt; 9
+  } else if (window.Element && window.Element.prototype && window.Element.prototype.attachEvent) {
+
+    // Only shim addEventListener if it has not already been shimmed.
+    if (window.Element.prototype.addEventListener === undefined) {
+
+      // Shim adapted from:
+      // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Compatibility
+      //
+      // Only doing a Canadarm.watch on standard watched events. No on onload event because
+      // we do not need to watch that event.  If that fails the page will not work.
+      if (!Event.prototype.preventDefault) {
+        Event.prototype.preventDefault = function() {
+          this.returnValue=false;
+        };
+      }
+      if (!Event.prototype.stopPropagation) {
+        Event.prototype.stopPropagation = function() {
+          this.cancelBubble=true;
+        };
+      }
+      if (!Element.prototype.addEventListener) {
+
+        addEventListener = function(type, listener) {
+          var self = this, e, wrapper2,
+            wrapper = function(e) {
+              e.target = e.srcElement;
+              e.currentTarget = self;
+              if (listener.handleEvent) {
+                listener.handleEvent(e);
+              } else {
+                listener.call(self,e);
+              }
+            };
+
+          if (type !== 'DOMContentLoaded') {
+            this.attachEvent('on' + type, Canadarm.watch(wrapper));
+            eventListeners.push({object:this, type:type, listener:listener, wrapper:wrapper});
+          }
+        };
+
+        removeEventListener = function(type, listener) {
+          var counter = 0, eventListener;
+
+          while (counter &lt; eventListeners.length) {
+            eventListener = eventListeners[counter];
+
+            if (eventListener.object == this && eventListener.type === type && eventListener.listener == listener) { /* jshint ignore:line */
+
+              if (type !== 'DOMContentLoaded') {
+                this.detachEvent('on' + type, Canadarm.watch(eventListener.wrapper));
+              }
+
+              eventListeners.splice(counter, 1);
+              break;
+            }
+            ++counter;
+          }
+        };
+
+        Element.prototype.addEventListener = addEventListener;
+        Element.prototype.removeEventListener = removeEventListener;
+      }
+    }
+  }
+}
+
+/**
+ * Internal method used to setup automatic event error logging
+ * when a consumer has opted in via settings.
+ */
+Canadarm.setUpEventListening = setUpEventListening;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Namespaces</h3><ul><li><a href="Canadarm.html">Canadarm</a></li><li><a href="Canadarm.Appender.html">Appender</a></li><li><a href="Canadarm.constant.html">constant</a></li><li><a href="Canadarm.Events.html">Events</a></li><li><a href="Canadarm.Handler.html">Handler</a></li><li><a href="Canadarm.level.html">level</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_oldOnError">_oldOnError</a></li><li><a href="global.html#_onError">_onError</a></li><li><a href="global.html#addAppender">addAppender</a></li><li><a href="global.html#addHandler">addHandler</a></li><li><a href="global.html#customLogEvent">customLogEvent</a></li><li><a href="global.html#fixedEncodeURIComponent">fixedEncodeURIComponent</a></li><li><a href="global.html#gatherErrors">gatherErrors</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#pushErrors">pushErrors</a></li><li><a href="global.html#setUpOnErrorHandler">setUpOnErrorHandler</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue May 19 2015 14:52:14 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

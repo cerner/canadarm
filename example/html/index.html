@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Title</h1>
+    <section>
+      <p>Paragraph of stuff</p>
+      <a id="link" href="#">Click me, i'm broke</a>
+      <button id="addClick">Click Event</button>
+      <button id="removeClick">Detach Click Event</button>
+      <button id="addClickBack">Add Click Event Back</button>
+      <p>
+        Click the "Click Event" button after calling detach event to see
+        that detach event worked. It should no longer make an alert.
+       </p>
+    </section>
+    <script type="text/javascript" src="../js/canadarm.js"></script>
+    <script type="text/javascript">
+      /**
+        Example code used to add the console and beacon handlers.  As well as add the
+        standard and platform appenders.
+      */
+      Canadarm.init({
+        onError: true,
+        wrapEvents: true,
+        appenders: [
+          Canadarm.Appender.standardLogAppender
+        ],
+        handlers: [
+          Canadarm.Handler.beaconLogHandler('http://example.com/beacon.gif'),
+          Canadarm.Handler.consoleLogHandler
+        ]
+      });
+    </script>
+    <script src="../js/broken.js"></script>
+  </body>
+
+</html>

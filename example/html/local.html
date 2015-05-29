@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Title</h1>
+    <section>
+      <p>Paragraph of stuff</p>
+      <!-- Events are not wrapped on this page, thus this will not log anything
+           via Canadarm -->
+      <a id="link" href="#">Click me, i'm broke</a>
+      <button id="addClick">Click Event</button>
+      <button id="removeClick">Detach Click Event</button>
+      <button id="addClickBack">Add Click Event Back</button>
+      <p>
+        Click the "Click Event" button after calling detach event to see
+        that detach event worked. It should no longer make an alert.
+       </p>
+    </section>
+    <script type="text/javascript" src="../js/canadarm.js"></script>
+    <script type="text/javascript">
+      /**
+        Example code used to add the console and beacon handlers.  As well as add the
+        standard and platform appenders.
+      */
+      Canadarm.init({
+        onError: false,
+        wrapEvents: false,
+        appenders: [
+          Canadarm.Appender.standardLogAppender
+        ],
+        handlers: [
+          Canadarm.Handler.beaconLogHandler('http://example.com/beacon.gif'),
+          Canadarm.Handler.consoleLogHandler
+        ]
+      });
+
+      // set window.localPage so the broken.js file sets up the local logging.
+      window.localPage = true;
+    </script>
+    <script src="../js/broken.js"></script>
+    <script>
+      // The use of localWatch here should make the error only
+      // be logged to the console, not use the splunk handler.
+      var itBeBroken = Canadarm.localWatch(function (){
+        console.log('broken for localPage and locally watched.');
+        x + y;
+      }, {handlers: [Canadarm.Handler.consoleLogHandler]}
+      );
+
+      itBeBroken();
+      Canadarm.localAttempt(function (){
+        console.log('Insta broken attempt local.');
+        x + y;
+      }, {handlers: [Canadarm.Handler.consoleLogHandler]});
+    </script>
+  </body>
+
+</html>

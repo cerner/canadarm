@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: appender/standard.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: appender/standard.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/* globals document */
+
+/**
+ * Recommended default log appender. Adds property attributes below to the logs.  Depending
+ * on the browser some values may be default logged as '?' when the value cannot
+ * be determined.
+ *
+ * @memberof Canadarm.Appender
+ * @function standardLogAppender
+ *
+ * @property logDate      {string}  - The UTC time the browser threw the error.
+ * @property language     {string}  - The language set on the page.
+ * @property characterSet {string}  - Encoding used to read the page.
+ * @property type         {string}  - Specifies the type of the log as 'jserror'.
+ * @property columnNumber {integer} - The column number of where the error took place.
+ * @property lineNumber   {integer} - The line number of where the error took place.
+ * @property msg          {string}  - The message for the error. (e.g. [ERROR]: blah blah)
+ * @property pageURL      {string}  - The URL location of the page the error occurred on.
+ * @property url          {string}  - The URL location of the script that produced the error.
+ * @property stack        {object}  - Stacktrace of the exception that occurred.
+ *
+ * @param {string} level     - Log level of the exception. (e.g. ERROR, FATAL)
+ * @param {error}  exception - JavaScript Error object.
+ * @param {string} message   - Message of the error.
+ * @param {object} data      - A no nesting key/value set of extra data for a log.
+ */
+function standardLogAppender(level, exception, message, data) {
+  // Attempt to get the Error stack if it isn't passed in.  Without the stack
+  // the traceback is not as useful.  For more information on Error stack see:
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack
+  var stack        = exception ? exception.stack : new Error().stack || null,
+    scriptURL      =  Canadarm.constant.UNKNOWN_LOG,
+    errorMessage   = message || exception.message || Canadarm.constant.UNKNOWN_LOG,
+    // Want an ISO string because local time sent as a log is not helpful
+    currentDate    = new Date(),
+    pageURI        = window.location.href,
+    lineNumber     = Canadarm.constant.UNKNOWN_LOG,
+    columnNumber   = Canadarm.constant.UNKNOWN_LOG,
+    language       = window.navigator.language || Canadarm.constant.UNKNOWN_LOG,
+    characterSet   = window.document.characterSet ||
+                    document.charset ||
+                    document.defaultCharset ||
+                    Canadarm.constant.UNKNOWN_LOG,
+    logAttributes,
+    dataKey,
+    stackData,
+    dateTime,
+
+    // first position is the URL of the script,
+    // second position is the line number,
+    // third position is the column number,
+    // last position is used to gobble down so we can get the data in all browsers.
+    STACK_SCRIPT_COLUMN_LINE_FINDER = /(http\:\/\/.*\/.*\.js)\:(\d+)\:(\d+)(.*)$/;
+
+  // Generates the url, lineNumber, and Column number of the error.
+  function findStackData(stack) {
+    // If the stack is not in the error we cannot get any information and
+    // should return immediately.
+    if (stack === undefined || stack === null) {
+      return {
+        'url': Canadarm.constant.UNKNOWN_LOG,
+        'lineNumber': Canadarm.constant.UNKNOWN_LOG,
+        'columnNumber': Canadarm.constant.UNKNOWN_LOG
+      };
+    }
+
+    // Remove the newlines from all browsers so we can regex this easier
+    var stackBits = stack.replace(/(\r\n|\n|\r)/gm,'').match(STACK_SCRIPT_COLUMN_LINE_FINDER),
+      newStack, stackData = [],
+      stackHasBits = (stackBits !== null && stackBits !== undefined);
+
+    while (stackHasBits) {
+      stackBits = stackBits[1].match(STACK_SCRIPT_COLUMN_LINE_FINDER);
+      newStack = stackBits !== null ? stackBits[1] : null;
+      stackData = stackBits !== null ? stackBits : stackData;
+      stackHasBits = (stackBits !== null && stackBits !== undefined);
+    }
+
+    return {
+      'url': stackData.length >= 1 ? stackData[1] : Canadarm.constant.UNKNOWN_LOG,
+      'lineNumber': stackData.length >= 1 ? stackData[2] : Canadarm.constant.UNKNOWN_LOG,
+      'columnNumber': stackData.length >= 1 ? stackData[3] : Canadarm.constant.UNKNOWN_LOG
+    };
+  }
+
+  // Use an internal polyfill for Date.toISOString
+  // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString#Polyfill
+  // Not attaching it to prototype so we do not add implementation to consumers.
+  function pad(number) {
+    if (number &lt; 10) {
+      return '0' + number;
+    }
+    return number;
+  }
+
+  if (!currentDate.toISOString) {
+    dateTime = (function() {
+      return currentDate.getUTCFullYear() +
+        '-' + pad(currentDate.getUTCMonth() + 1) +
+        '-' + pad(currentDate.getUTCDate()) +
+        'T' + pad(currentDate.getUTCHours()) +
+        ':' + pad(currentDate.getUTCMinutes()) +
+        ':' + pad(currentDate.getUTCSeconds()) +
+        '.' + (currentDate.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+        'Z';
+    }());
+  } else {
+    dateTime = currentDate.toISOString();
+  }
+
+  // If stack is not defined we are in a browser that does not fully support our logging.
+  // Or one of our custom loggers was called, e.g. Logger.debug('message').
+  if (exception.stack === null) {
+    var scripts = document.getElementsByTagName('script');
+    scriptURL = (document.currentScript || scripts[scripts.length - 1]).src;
+
+  } else {
+    stackData = findStackData(stack);
+
+    scriptURL = stackData.url;
+    lineNumber = stackData.lineNumber;
+    columnNumber = stackData.columnNumber;
+
+  }
+
+  // Set base values for log attributes.
+  logAttributes = {
+    'characterSet' : characterSet,
+    'columnNumber' : columnNumber,
+    'language'     : language,
+    'lineNumber'   : lineNumber,
+    'logDate'      : dateTime,
+    'msg'          : '[' + level + ']: ' + errorMessage,
+    'pageURL'      : pageURI,
+    'stack'        : stack || Canadarm.constant.UNKNOWN_LOG,
+    'type'         : 'jserror',
+    'scriptURL'    : scriptURL
+  };
+
+  // Gather the data and add it to our standard logger.
+  for (dataKey in data) {
+    if (!data.hasOwnProperty(dataKey)){
+      continue;
+    }
+    // Only set value for legitimate data.
+    if (data[dataKey] !== null && data[dataKey] !== undefined) {
+      logAttributes[dataKey] = data[dataKey];
+    }
+  }
+
+  return logAttributes;
+}
+
+Canadarm.Appender.standardLogAppender = standardLogAppender;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Namespaces</h3><ul><li><a href="Canadarm.html">Canadarm</a></li><li><a href="Canadarm.Appender.html">Appender</a></li><li><a href="Canadarm.constant.html">constant</a></li><li><a href="Canadarm.Events.html">Events</a></li><li><a href="Canadarm.Handler.html">Handler</a></li><li><a href="Canadarm.level.html">level</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_oldOnError">_oldOnError</a></li><li><a href="global.html#_onError">_onError</a></li><li><a href="global.html#addAppender">addAppender</a></li><li><a href="global.html#addHandler">addHandler</a></li><li><a href="global.html#customLogEvent">customLogEvent</a></li><li><a href="global.html#fixedEncodeURIComponent">fixedEncodeURIComponent</a></li><li><a href="global.html#gatherErrors">gatherErrors</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#pushErrors">pushErrors</a></li><li><a href="global.html#setUpOnErrorHandler">setUpOnErrorHandler</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue May 19 2015 14:52:14 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "canadarm",
+  "description": "A JavaScript logger that works for you!",
+  "version": "1.0.0",
+  "author": {
+    "name": "Garry Polley",
+    "email": "garry.polley@cerner.com"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-available-tasks": "^0.5.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jasmine": "^0.8.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-githooks": "^0.3.1",
+    "grunt-jsdoc": "^0.5.8",
+    "grunt-mocha": "^0.4.11",
+    "grunt-mocha-test": "^0.12.4",
+    "matchdep": "^0.3.0",
+    "mocha": "^2.1.0",
+    "should": "^4.4.2",
+    "sinon": "^1.12.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cerner/canadarm.git"
+  }
+}

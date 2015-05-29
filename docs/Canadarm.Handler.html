@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: Handler</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Namespace: Handler</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="Canadarm.html">Canadarm</a>.</span>
+    
+    Handler
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="beaconLogHandler"><span class="type-signature">&lt;static> </span>beaconLogHandler<span class="signature">(beaconURL)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Beacon log handler. Uses a configured beacon file to get logs to a remote logging location.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>beaconURL</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The URL to send logs.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="beacon.js.html">handler/beacon.js</a>, <a href="beacon.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a function that takes an attribute object for logging.
+</div>
+
+
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>  Canadarm.addHandler(Canadarm.Handler.beaconLogHandler('http://example.com/to/beacon.gif'));
+
+  // If you use an access_combined log format for the beacon you will see something like:
+  10.162.143.4 - - [21/Apr/2015:16:07:59 -0500] "GET ?characterSet=UTF-8%0A&columnNumber=%3F%0A&language=en-US...</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="consoleLogHandler"><span class="type-signature">&lt;static> </span>consoleLogHandler<span class="signature">(logAttributes)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Console log handler. Outputs logs to console.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>logAttributes</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the attributes to log, key/value pairs, no nesting.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="console.js.html">handler/console.js</a>, <a href="console.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>  Canadarm.addHandler(Canadarm.Handler.consoleLogHandler);
+
+  // In Chrome the output looks similar to:
+  [ERROR]: two is not defined
+  characterSet: "windows-1252"
+  columnNumber: "17"
+  language: "en-US"
+  lineNumber: "17"
+  logDate: "2015-04-22T21:35:40.389Z"
+  msg: "[ERROR]: two is not defined"
+  pageURL: "http://localhost:8000/html/"
+  scriptURL: "http://localhost:8000/js/broken.js"
+  stack: "ReferenceError: two is not defined↵
+      at broken_watched_function (http://localhost:8000/js/broken.js:17:17)↵
+      at wrapper (http://localhost:8000/js/canadarm.js:616:17)↵
+      at http://localhost:8000/js/broken.js:60:40
+  "type: "jserror"</code></pre>
+
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Namespaces</h3><ul><li><a href="Canadarm.html">Canadarm</a></li><li><a href="Canadarm.Appender.html">Appender</a></li><li><a href="Canadarm.constant.html">constant</a></li><li><a href="Canadarm.Events.html">Events</a></li><li><a href="Canadarm.Handler.html">Handler</a></li><li><a href="Canadarm.level.html">level</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_oldOnError">_oldOnError</a></li><li><a href="global.html#_onError">_onError</a></li><li><a href="global.html#addAppender">addAppender</a></li><li><a href="global.html#addHandler">addHandler</a></li><li><a href="global.html#customLogEvent">customLogEvent</a></li><li><a href="global.html#fixedEncodeURIComponent">fixedEncodeURIComponent</a></li><li><a href="global.html#gatherErrors">gatherErrors</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#pushErrors">pushErrors</a></li><li><a href="global.html#setUpOnErrorHandler">setUpOnErrorHandler</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue May 19 2015 14:52:14 GMT-0500 (CDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
