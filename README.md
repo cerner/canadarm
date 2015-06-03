@@ -1,5 +1,11 @@
 # canadarm
 
+[![Build Status](https://api.travis-ci.org/cerner/canadarm.svg)][travis]
+[![Code Climate](http://img.shields.io/codeclimate/github/cerner/canadarm.svg)][codeclimate]
+
+[travis]: https://travis-ci.org/cerner/canadarm
+[codeclimate]: https://codeclimate.com/github/cerner/canadarm
+
 Canadarm makes JavaScript logging easy and seamless, helping you figure out what went wrong with your scripts.
 Named for the [Canadarm](http://en.wikipedia.org/wiki/Canadarm) we hope this too helps you piece together
 log information to figure out what went wrong with your scripts.
