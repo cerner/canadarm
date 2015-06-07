@@ -2,6 +2,7 @@
   "name": "canadarm",
   "description": "A JavaScript logger that works for you!",
   "version": "1.0.0",
+  "license": "Apache-2.0",
   "author": {
     "name": "Garry Polley",
     "email": "garry.polley@cerner.com"
