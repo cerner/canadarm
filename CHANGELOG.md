@@ -1,5 +1,5 @@
-1.0.1
------
+Next Release
+------------
 
 * Fix issue #6: `standardLogAppender` handles missing exception argument.
 
