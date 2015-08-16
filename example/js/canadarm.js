@@ -1,4 +1,5 @@
 (function (window, undefined){
+  /* jshint ignore:start */
   var Canadarm = {};
 
   Canadarm.Appender = {};
@@ -395,8 +396,8 @@ function standardLogAppender(level, exception, message, data) {
     columnNumber   = Canadarm.constant.UNKNOWN_LOG,
     language       = window.navigator.language || Canadarm.constant.UNKNOWN_LOG,
     characterSet   = window.document.characterSet ||
-                    document.charset ||
-                    document.defaultCharset ||
+                    window.document.charset ||
+                    window.document.defaultCharset ||
                     Canadarm.constant.UNKNOWN_LOG,
     logAttributes,
     dataKey,
@@ -866,13 +867,24 @@ function setUpEventListening() {
  */
 Canadarm.setUpEventListening = setUpEventListening;
 
- window.Canadarm = Canadarm;
+// Add navigator so when running in a node environment it exists.
+if (!window.navigator) {
+  window.navigator = {};
+}
 
- // Add navigator so when running in a node environment it exists.
- if (!window.navigator) {
-   window.navigator = {};
- }
+// Add location so when running in a node environment it exists.
+if (!window.location) {
+  window.location = {};
+}
+
+// Add document for node
+if (!window.document) {
+  window.document = {};
+}
+
+ window.Canadarm = Canadarm;
 
  // Added so we have access to window in tests.
  Canadarm._window = window;
+ /* jshint ignore:end */
 }(this));
