@@ -80,8 +80,7 @@ module.exports = function (grunt) {
         'lib/instrument/**/event.js',
         'lib/constant.js',
         'lib/core.js',
-        'lib/level.js',
-        '!build/*'
+        'lib/level.js'
       ],
       concat: ['build/canadarm.js'],
       options: {
