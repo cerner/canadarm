@@ -10,6 +10,8 @@ Canadarm makes JavaScript logging easy and seamless, helping you figure out what
 Named for the [Canadarm](http://en.wikipedia.org/wiki/Canadarm) we hope this too helps you piece together
 log information to figure out what went wrong with your scripts.
 
+If you have any ideas or questions reach out to us on our [Google group][google-group-url].
+
 # Installing Canadarm
 
 Install Canadarm by using one of the files located in the [build][build-dir] folder. Alternatively,
@@ -342,3 +344,4 @@ http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or 
 [consolelog-handler]: lib/handler/console.js
 [beaconlog-handler]: lib/handler/beacon.js
 [build-dir]: build/
+[google-group-url]: https://groups.google.com/forum/#!forum/canadarm
