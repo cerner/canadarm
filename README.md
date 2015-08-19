@@ -1,7 +1,7 @@
 # canadarm
 
 [![Build Status](https://api.travis-ci.org/cerner/canadarm.svg)][travis]
-[![Code Climate](http://img.shields.io/codeclimate/github/cerner/canadarm.svg)][codeclimate]
+[![Code Climate](https://codeclimate.com/github/cerner/canadarm/badges/gpa.svg)][codeclimate]
 
 [travis]: https://travis-ci.org/cerner/canadarm
 [codeclimate]: https://codeclimate.com/github/cerner/canadarm
