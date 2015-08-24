@@ -34,6 +34,9 @@
     "afterEach":  false,
     "after":      false,
     "Image":      false,
-    "console":    false
+    "console":    false,
+    "define":     true,
+    "module":     true,
+    "exports":    true
   }
 }
