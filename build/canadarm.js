@@ -469,8 +469,8 @@ function standardLogAppender(level, exception, message, data) {
   // If stack is not defined we are in a browser that does not fully support our logging.
   // Or one of our custom loggers was called, e.g. Logger.debug('message').
   if (exception === undefined || exception === null || exception.stack === null) {
-    var scripts = document.getElementsByTagName('script');
-    scriptURL = (document.currentScript || scripts[scripts.length - 1]).src;
+    var scripts = window.document.getElementsByTagName('script');
+    scriptURL = (window.document.currentScript || scripts[scripts.length - 1]).src;
 
   } else {
     stackData = findStackData(stack);

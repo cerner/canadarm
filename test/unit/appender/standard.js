@@ -1,7 +1,7 @@
 var assert = require('assert'),
   Canadarm = require('../../../build/canadarm.min').Canadarm,
   sinon = require('sinon'),
-  errorObject = new Error(),
+  errorObject,
   generateError = function(){throw errorObject;};
 
 describe('Canadarm.Appender', function () {
@@ -14,8 +14,11 @@ describe('Canadarm.Appender', function () {
     Canadarm._window.document = {
       characterSet: 'utf-meow',
       charset: 'utf-bark',
-      defaultCharset: 'utf-woof'
+      defaultCharset: 'utf-woof',
+      currentScript: {src: 'fake-src'},
+      getElementsByTagName: function () {return []}
     };
+    errorObject = new Error();
   });
 
   describe('#standardLogAppender', function() {
@@ -58,6 +61,40 @@ describe('Canadarm.Appender', function () {
       assert.equal(actualAttributes.stack, errorObject.stack);
       assert.equal(actualAttributes.type, 'jserror');
       assert.equal(actualAttributes.scriptURL, Canadarm.constant.UNKNOWN_LOG);
+    });
+
+    describe('invalid exception', function () {
+      it('returns correct script if exception is undefined', function () {
+        var actualAttributes = Canadarm.Appender.standardLogAppender(
+          Canadarm.level.INFO,
+          undefined,
+          'm'
+        );
+
+        assert.equal(actualAttributes.scriptURL, 'fake-src');
+      });
+
+      it('returns correct script if exception is null', function () {
+        var actualAttributes = Canadarm.Appender.standardLogAppender(
+          Canadarm.level.INFO,
+          null,
+          'm'
+        );
+
+        assert.equal(actualAttributes.scriptURL, 'fake-src');
+      });
+
+      it('returns correct script if exception stack is null', function () {
+        errorObject.stack = null;
+
+        var actualAttributes = Canadarm.Appender.standardLogAppender(
+          Canadarm.level.INFO,
+          errorObject,
+          'm'
+        );
+
+        assert.equal(actualAttributes.scriptURL, 'fake-src');
+      });
     });
   });
 });
