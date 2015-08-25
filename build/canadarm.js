@@ -907,5 +907,4 @@ if (!window.document) {
     // Everything else
     window.Canadarm = Canadarm;
   }
-  /* jshint ignore:end */
 }(typeof window !== 'undefined' ? window : this));
