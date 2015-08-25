@@ -5,8 +5,9 @@
   "license": "Apache-2.0",
   "author": {
     "name": "Garry Polley",
-    "email": "garry.polley@cerner.com"
+    "email": "garrympolley@gmail.com"
   },
+  "main": "build/canadarm.js",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-available-tasks": "^0.5.1",
