@@ -1,5 +1,5 @@
 (function (window, undefined){
-  /* jshint ignore:start */
+  /* jshint maxstatements:false */
   var Canadarm = {};
 
   Canadarm.Appender = {};
@@ -867,6 +867,21 @@ function setUpEventListening() {
  */
 Canadarm.setUpEventListening = setUpEventListening;
 
+// Add navigator so when running in a node environment it exists.
+if (!window.navigator) {
+  window.navigator = {};
+}
+
+// Add location so when running in a node environment it exists.
+if (!window.location) {
+  window.location = {};
+}
+
+// Add document for node
+if (!window.document) {
+  window.document = {};
+}
+
   // Add navigator so when running in a node environment it exists.
   if (!window.navigator) {
     window.navigator = {};
@@ -892,5 +907,5 @@ Canadarm.setUpEventListening = setUpEventListening;
     // Everything else
     window.Canadarm = Canadarm;
   }
-
+  /* jshint ignore:end */
 }(typeof window !== 'undefined' ? window : this));

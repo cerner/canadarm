@@ -76,16 +76,9 @@ module.exports = function (grunt) {
 
     jshint: {
       all: [
-        'lib/appender/**/*.js',
-        'lib/handler/**/*.js',
-        'lib/instrument/**/function.js',
-        'lib/instrument/**/global.js',
-        'lib/instrument/**/event.js',
-        'lib/constant.js',
-        'lib/core.js',
-        'lib/level.js'
+        'lib/**'
       ],
-      concat: ['build/canadarm.js'],
+      concat: 'build/canadarm.js',
       options: {
         jshintrc: true
       }
