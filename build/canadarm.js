@@ -893,4 +893,4 @@ Canadarm.setUpEventListening = setUpEventListening;
     window.Canadarm = Canadarm;
   }
 
-}(this));
+}(typeof window !== 'undefined' ? window : this));
