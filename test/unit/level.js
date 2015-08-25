@@ -1,7 +1,7 @@
 /* global Canadarm: true */
 
 var assert = require('assert'),
-  Canadarm = require('../../build/canadarm.min').Canadarm;
+  Canadarm = require('../../build/canadarm.min');
 
 describe('Canadarm', function(){
   describe('#level', function (){
