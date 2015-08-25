@@ -1,7 +1,7 @@
 # canadarm
 
 [![Build Status](https://api.travis-ci.org/cerner/canadarm.svg)][travis]
-[![Code Climate](http://img.shields.io/codeclimate/github/cerner/canadarm.svg)][codeclimate]
+[![Code Climate](https://codeclimate.com/github/cerner/canadarm/badges/gpa.svg)][codeclimate]
 
 [travis]: https://travis-ci.org/cerner/canadarm
 [codeclimate]: https://codeclimate.com/github/cerner/canadarm
@@ -9,6 +9,8 @@
 Canadarm makes JavaScript logging easy and seamless, helping you figure out what went wrong with your scripts.
 Named for the [Canadarm](http://en.wikipedia.org/wiki/Canadarm) we hope this too helps you piece together
 log information to figure out what went wrong with your scripts.
+
+If you have any ideas or questions reach out to us on our [Google group][google-group-url].
 
 # Installing Canadarm
 
@@ -342,3 +344,4 @@ http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or 
 [consolelog-handler]: lib/handler/console.js
 [beaconlog-handler]: lib/handler/beacon.js
 [build-dir]: build/
+[google-group-url]: https://groups.google.com/forum/#!forum/canadarm

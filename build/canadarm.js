@@ -867,24 +867,30 @@ function setUpEventListening() {
  */
 Canadarm.setUpEventListening = setUpEventListening;
 
-// Add navigator so when running in a node environment it exists.
-if (!window.navigator) {
-  window.navigator = {};
-}
+  // Add navigator so when running in a node environment it exists.
+  if (!window.navigator) {
+    window.navigator = {};
+  }
 
-// Add location so when running in a node environment it exists.
-if (!window.location) {
-  window.location = {};
-}
+  // Added so we have access to window in tests.
+  Canadarm._window = window;
 
-// Add document for node
-if (!window.document) {
-  window.document = {};
-}
+  // Expose Canadarm
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    window.Canadarm = Canadarm;
+    define('canadarm', [], function() {
+      return Canadarm;
+    });
+  } else if (typeof module === 'object') {
+    // browserify
+    module.exports = Canadarm;
+  } else if (typeof exports === 'object') {
+    // CommonJS
+    exports = Canadarm;
+  } else {
+    // Everything else
+    window.Canadarm = Canadarm;
+  }
 
- window.Canadarm = Canadarm;
-
- // Added so we have access to window in tests.
- Canadarm._window = window;
- /* jshint ignore:end */
-}(this));
+}(typeof window !== 'undefined' ? window : this));

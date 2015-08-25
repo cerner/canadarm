@@ -65,6 +65,9 @@ module.exports = function (grunt) {
 
     uglify: {
       candarm: {
+        options: {
+          sourceMap: true
+        },
         files: {
           'build/canadarm.min.js': ['build/canadarm.js']
         }
