@@ -6,7 +6,7 @@
   Canadarm.Handler = {};
   Canadarm.constant = {};
   Canadarm.utils = {};
-  Canadarm.version = '1.0.1';
+  Canadarm.version = '1.1.0.SNAPSHOT';
 
 /**
  * Values used throughout Canadarm to keep logs consistent.
