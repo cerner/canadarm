@@ -1,5 +1,3 @@
-/* global Canadarm: true */
-
 var assert = require('assert'),
   Canadarm = require('../../build/canadarm.min');
 

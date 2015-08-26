@@ -1,4 +1,18 @@
 module.exports = function (grunt) {
+  var canadarmFiles = [
+    'lib/intro.js',
+    'lib/constant.js',
+    'lib/level.js',
+    'lib/utils.js',
+    'lib/core.js',
+    'lib/appender/**/*.js',
+    'lib/handler/**/*.js',
+    'lib/instrument/**/function.js',
+    'lib/instrument/**/global.js',
+    'lib/instrument/**/event.js',
+    'lib/mock.js',
+    'lib/outro.js'
+  ];
 
   // Grunt Loaded Tasks
   // http://chrisawren.com/posts/Advanced-Grunt-tooling
@@ -24,32 +38,8 @@ module.exports = function (grunt) {
     concat: {
       canadarm: {
         files: {
-          'build/canadarm.js': [
-            'lib/intro.js',
-            'lib/constant.js',
-            'lib/level.js',
-            'lib/utils.js',
-            'lib/core.js',
-            'lib/appender/**/*.js',
-            'lib/handler/**/*.js',
-            'lib/instrument/**/function.js',
-            'lib/instrument/**/global.js',
-            'lib/instrument/**/event.js',
-            'lib/outro.js'
-          ],
-          'example/js/canadarm.js': [
-            'lib/intro.js',
-            'lib/constant.js',
-            'lib/level.js',
-            'lib/utils.js',
-            'lib/core.js',
-            'lib/appender/**/*.js',
-            'lib/handler/**/*.js',
-            'lib/instrument/**/function.js',
-            'lib/instrument/**/global.js',
-            'lib/instrument/**/event.js',
-            'lib/outro.js'
-          ]
+          'build/canadarm.js': canadarmFiles,
+          'example/js/canadarm.js': canadarmFiles
         }
       }
     },
@@ -86,16 +76,9 @@ module.exports = function (grunt) {
 
     jshint: {
       all: [
-        'lib/appender/**/*.js',
-        'lib/handler/**/*.js',
-        'lib/instrument/**/function.js',
-        'lib/instrument/**/global.js',
-        'lib/instrument/**/event.js',
-        'lib/constant.js',
-        'lib/core.js',
-        'lib/level.js'
+        'lib/**'
       ],
-      concat: ['build/canadarm.js'],
+      concat: 'build/canadarm.js',
       options: {
         jshintrc: true
       }

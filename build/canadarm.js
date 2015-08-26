@@ -1,5 +1,5 @@
 (function (window, undefined){
-  /* jshint ignore:start */
+  /* jshint maxstatements:false */
   var Canadarm = {};
 
   Canadarm.Appender = {};
@@ -396,8 +396,8 @@ function standardLogAppender(level, exception, message, data) {
     columnNumber   = Canadarm.constant.UNKNOWN_LOG,
     language       = window.navigator.language || Canadarm.constant.UNKNOWN_LOG,
     characterSet   = window.document.characterSet ||
-                    document.charset ||
-                    document.defaultCharset ||
+                    window.document.charset ||
+                    window.document.defaultCharset ||
                     Canadarm.constant.UNKNOWN_LOG,
     logAttributes,
     dataKey,
@@ -468,9 +468,9 @@ function standardLogAppender(level, exception, message, data) {
 
   // If stack is not defined we are in a browser that does not fully support our logging.
   // Or one of our custom loggers was called, e.g. Logger.debug('message').
-  if (exception.stack === null) {
-    var scripts = document.getElementsByTagName('script');
-    scriptURL = (document.currentScript || scripts[scripts.length - 1]).src;
+  if (exception === undefined || exception === null || exception.stack === null) {
+    var scripts = window.document.getElementsByTagName('script');
+    scriptURL = (window.document.currentScript || scripts[scripts.length - 1]).src;
 
   } else {
     stackData = findStackData(stack);
@@ -867,6 +867,21 @@ function setUpEventListening() {
  */
 Canadarm.setUpEventListening = setUpEventListening;
 
+// Add navigator so when running in a node environment it exists.
+if (!window.navigator) {
+  window.navigator = {};
+}
+
+// Add location so when running in a node environment it exists.
+if (!window.location) {
+  window.location = {};
+}
+
+// Add document for node
+if (!window.document) {
+  window.document = {};
+}
+
   // Add navigator so when running in a node environment it exists.
   if (!window.navigator) {
     window.navigator = {};
@@ -892,5 +907,4 @@ Canadarm.setUpEventListening = setUpEventListening;
     // Everything else
     window.Canadarm = Canadarm;
   }
-
 }(typeof window !== 'undefined' ? window : this));
