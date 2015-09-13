@@ -21,12 +21,13 @@ describe('Canadarm', function (){
       assert(consoleLogSpy.calledWith(fakeLog.msg, fakeLog));
     });
 
-    it('does not log the attributes when the key "msg" is undefined', function() {
+    it('logs the attributes expected when the key "msg" is undefined', function() {
       var fakeLog = {one: 'one', two: 'two'};
 
       Canadarm.Handler.consoleLogHandler(fakeLog);
 
-      assert(consoleLogSpy.callCount === 0);
+      assert(consoleLogSpy.calledOnce);
+      assert(consoleLogSpy.calledWith(fakeLog));
     });
   });
 });
