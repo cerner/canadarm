@@ -14,8 +14,16 @@ If you have any ideas or questions reach out to us on our [Google group][google-
 
 # Installing Canadarm
 
-Install Canadarm by using one of the files located in the [build][build-dir] folder. Alternatively,
-you may also use `npm install canadarm`.
+Canadarm can be installed in the following ways:
+
+* Use one of the files located in the [build][build-dir] folder.
+* Use [npm][npm]:
+
+  `npm install canadarm`
+
+* Reference a hosted version provided by [jsdelivr][jsdelivr]:
+
+  `https://cdn.jsdelivr.net/canadarm/1.0.1/canadarm.min.js`
 
 # Using canadarm
 
@@ -345,3 +353,5 @@ http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or 
 [beaconlog-handler]: lib/handler/beacon.js
 [build-dir]: build/
 [google-group-url]: https://groups.google.com/forum/#!forum/canadarm
+[npm]: https://www.npmjs.com/package/canadarm
+[jsdelivr]: https://github.com/jsdelivr/jsdelivr/tree/master/files/canadarm
