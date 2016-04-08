@@ -97,7 +97,7 @@ describe('Canadarm.Appender', function () {
       });
     });
 
-    describe('works without getElementsByTagName', function() {
+    describe('works without getElementsByTagName in a node context', function() {
       beforeEach(function () {
         delete Canadarm._window.document.getElementsByTagName;
       });
