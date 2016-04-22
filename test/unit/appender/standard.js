@@ -96,5 +96,19 @@ describe('Canadarm.Appender', function () {
         assert.equal(actualAttributes.scriptURL, 'fake-src');
       });
     });
+
+    describe('works without getElementsByTagName in a node context', function() {
+      beforeEach(function () {
+        delete Canadarm._window.document.getElementsByTagName;
+      });
+      it('returns without error', function () {
+        var actualAttributes = Canadarm.Appender.standardLogAppender(
+          Canadarm.level.INFO,
+          errorObject,
+          'm'
+        );
+        assert.equal(actualAttributes.scriptURL, '?');
+      });
+    });
   });
 });

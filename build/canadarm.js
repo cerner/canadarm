@@ -6,7 +6,7 @@
   Canadarm.Handler = {};
   Canadarm.constant = {};
   Canadarm.utils = {};
-  Canadarm.version = '1.1.0.SNAPSHOT';
+  Canadarm.version = '1.0.2';
 
 /**
  * Values used throughout Canadarm to keep logs consistent.
@@ -469,8 +469,13 @@ function standardLogAppender(level, exception, message, data) {
   // If stack is not defined we are in a browser that does not fully support our logging.
   // Or one of our custom loggers was called, e.g. Logger.debug('message').
   if (exception === undefined || exception === null || exception.stack === null) {
-    var scripts = window.document.getElementsByTagName('script');
-    scriptURL = (window.document.currentScript || scripts[scripts.length - 1]).src;
+    if (typeof window.document.getElementsByTagName === 'function') {
+      var scripts = window.document.getElementsByTagName('script');
+      scriptURL = (window.document.currentScript || scripts[scripts.length - 1]).src;
+    } else {
+      // Probably not in a browser, return unknown log.
+      scriptURL = Canadarm.constant.UNKNOWN_LOG;
+    }
 
   } else {
     stackData = findStackData(stack);
@@ -594,8 +599,10 @@ Canadarm.Handler.beaconLogHandler = beaconLogHandler;
       }
 
       console.error(logValues);
-    } else {
+    } else if (typeof logAttributes.msg !== 'undefined') {
       console.error(logAttributes.msg, logAttributes);
+    } else {
+      console.error(logAttributes);
     }
   }
 }

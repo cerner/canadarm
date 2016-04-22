@@ -8,7 +8,9 @@ Releasing the project requires these steps:
 1. `grunt build` (make sure it passes)
 2. `git tag -a NEW-TAG -m MESSAGE ABOUT RELEASE` (be sure it follows [semver][semantic-versioning])
 3. `npm publish` (make sure it's uploaded to [npm][npm-project])
-4. Update `master` to a new minor version
+4. Update [installation][installation-doc] documentation in README (jsdelivr link).
+5. Update `master` to a new minor version
 
 [npm-project]: https://www.npmjs.com/package/canadarm
 [semantic-versioning]: http://semver.org/
+[installation-doc]: https://github.com/cerner/canadarm#installing-canadarm
