@@ -1,3 +1,7 @@
+Next Release
+-------------
+
+
 1.0.2
 -------------
 * Fix issue #20: Custom log breaks in node context.
