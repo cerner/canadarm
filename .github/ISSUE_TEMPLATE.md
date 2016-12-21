@@ -14,5 +14,5 @@ Describe the issue as best you can. Screenshots, logs, and stack traces can be v
 1. Step 2
 
 ### Expected Outcomes
-- Links can be styled as buttons
-- Disabled links behave the same as disabled buttons
+- Custom logs work in the browser and node contexts
+- The Beacon Log Handler makes GET requests to the provided URL
