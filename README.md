@@ -21,9 +21,9 @@ Canadarm can be installed in the following ways:
 
   `npm install canadarm`
 
-* Reference a hosted version provided by [jsdelivr][jsdelivr]:
+* Reference a hosted version provided by [jsdelivr](https://www.jsdelivr.com/package/npm/canadarm):
 
-  `https://cdn.jsdelivr.net/canadarm/1.0.2/canadarm.min.js`
+  `https://cdn.jsdelivr.net/npm/canadarm@1.0.2/build/canadarm.min.js`
 
 # Using canadarm
 
